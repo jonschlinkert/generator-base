@@ -1,7 +1,7 @@
 {
   "name": "generator-base",
   "version": "0.1.0",
-  "description": "Base for creating Yeoman generator.",
+  "description": "Generator for creating Yeoman generators that are capable of remembering certain user answers, resulting in a better user experience. Generators come with the basic necessities, including docs.",
   "homepage": "https://github.com/assemble/generator-base",
   "author": {
     "name": "Jon Schlinkert",

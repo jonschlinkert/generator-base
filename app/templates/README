@@ -1,9 +1,15 @@
-# {%= name %} {%= badge("fury") %}
+# {%= name %} {%= badge('fury') %}
 
 > {%= description %}
 
 ## Install
-{%= include("install") %}
+{%= include("install-global") %}
+
+## Usage
+{%= docs("usage") %}
+
+## Generator options
+{%= docs("options") %}
 
 ## Author
 {%= author.name %}

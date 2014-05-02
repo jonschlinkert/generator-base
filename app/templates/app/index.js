@@ -179,19 +179,3 @@ BaseGenerator.prototype.license = function license() {
     this.template('LICENSE-MIT');
   }
 };
-
-BaseGenerator.prototype.utilsDirectory = function utilsDirectory() {
-  this.directory('_utils', '_utils', true);
-};
-
-BaseGenerator.prototype.appDirectory = function appDirectory() {
-  this.directory('app', 'app', true);
-};
-
-BaseGenerator.prototype.docsDirectory = function docsDirectory() {
-  this.directory('docs', 'docs', true);
-};
-
-BaseGenerator.prototype.testDirectory = function testDirectory() {
-  this.directory('test', 'test', true);
-};
