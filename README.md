@@ -1,10 +1,6 @@
 # generator-base [![NPM version](https://badge.fury.io/js/generator-base.png)](http://badge.fury.io/js/generator-base)
 
-> Kickstart documentation for any project! This is the official Yeoman generator for Base, a zero-configuration markdown documentation generator that is extremely easy to use and extend.
-
-We're just getting started here, **we'd love to see pull requests for other types of documentation** and for any kind of project!
-
-## Getting Started
+> Generator for creating Yeoman generators that are capable of remembering certain user answers, resulting in a better user experience. Generators come with the basic necessities, including docs.
 
 ## Install
 Install globally with [npm](npmjs.org):
@@ -17,86 +13,13 @@ npm i -g generator-base
 Once installed globally, simply run:
 
 * `yo base` to to start a new project
-* `yo base:doc [foo]` to add a [specific document](https://github.com/assemble/base-readme-includes) or 'include'.
 
 #### yo base
 
 Running the generator with `yo base` will add the following files to your project:
 
-* `.verbrc.md`: a markdown-runtime config file for Base. YAML front-matter can be used for config, and the markdown content is used to generate your project's README.md.
-* `package.json`: with minimal properties defined. However, if this alredy exists `base` will be added to `devDependencies`.
-
-## Sub-generators
-> Sub-generators allow you to add a specific file or files to an existing project.
-
-### yo base:config
-
-Add a Base config file with:
-
-```bash
-yo base:config foo
-```
-
-Where `foo` is one of the following:
-
-* `yo base:config md`: adds a `.verbrc.md` file
-* `yo base:config yml`: adds a `.verbrc.yml` file
-* `yo base:config basefile`: adds a `basefile.js` file
-
-
-**Pro tips**:
-
-* You can use the default config file, `.verbrc.yml`, by running just `yo base:config`.
-* You can add a `basefile.js` by running just `yo base:vf`
-
-Learn about [Base config files]().
-
-### yo base:doc
-
-Add a specific document with:
-
-```bash
-yo base:doc foo.md
-```
-
-Where `foo.md` is the name of the file you want to add. If the name used matches an actual file in [base-readme-includes](https://github.com/assemble/base-readme-includes), then that file will be copied into the `docs/` directory of your project.
-
-If the name _doesn't match_ a valid file in [base-readme-includes](https://github.com/assemble/base-readme-includes), then a new "starter" document will be created using the given file name.
-
-### yo base:boilerplate
-
-Use a boilerplate to kickstart documentation for a project. Boilerplates include a `README.tmpl.md` template and a few includes, such as `install.md`, `options.md` etc.
-
-```bash
-yo base:boilerplate foo
-```
-
-Where `foo` is the name of the boilerplate you want to use from [base-boilerplates](https://github.com/assemble/base-boilerplates).
-
-Valid `yo base:boilerplate` arguments are:
-
-* `node`: adds generic documentation for a [Node.js](nodejs.org) project
-* `helper`: adds generic documentation for a [Handlebars](handlebarsjs.com) helper project
-* `assembleplugin`: adds generic documents for an [Assemble](https://github.com/assemble/assemble) plugin
-* `gulpplugin`: adds generic documents for a [gulp](gulpjs.com) plugin
-* `gruntplugin`: adds generic documents for a [Grunt](gruntjs.com) plugin
-
-**Pro tip**: you can use the default boilerplate, `node`, by running just `yo base:boilerplate`.
-
-Visit the docs for [adding custom boilerplates](./docs/custom-boilerplates.md).
-
-
-### yo base:data
-
-This subgenerator makes it easy to add data files to extend the context available to your templates (by default Base processes templates using data from your project's package.json, but you can extend the data available to your templates with any JSON or YAML files by specifying them in a `data` property in `.verbrc.yml` or `.verbrc.yml`).
-
-* `yo base:data changelog`: adds a `CHANGELOG` file to the root of your project, formatted as valid YAML.
-
-
-### yo base:readme
-
-Add a readme template to `docs/README.tmpl.md` by running `yo base:readme`.
-
+* `package.json`: with minimal properties defined.
+* `.verbrc.md`: a "docs-config" file for [Verb](https://github.com/assemble/verb). YAML front-matter can be used in this file, and the markdown content is used to generate your project's README.md.
 
 ## Generator options
 Command: `-s` | `--skip-install`
@@ -111,13 +34,19 @@ Skips the Yeoman welcome message.
 
 **Jon Schlinkert**
 
-+ [github/jonschlinkert](http://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](https://twitter.com/jonschlinkert)
++ [github/jonschlinkert](https://github.com/jonschlinkert)
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
+
+**Brian Woodward**
+
++ [github/doowb](https://github.com/doowb)
++ [twitter/doowb](http://twitter.com/doowb)
+
 
 ## License
-Copyright (c) 2014 Jon Schlinkert, contributors.
+Copyright (c) 2014 Jon Schlinkert, contributors.  
 Released under the MIT license
 
 ***
 
-_This file was generated by [base-cli](https://github.com/assemble/base-cli) on April 21, 2014._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on May 02, 2014._
