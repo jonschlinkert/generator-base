@@ -1,6 +1,6 @@
 /*!
- * generator-base <https://github.com/jonschlinkert/generator-base>
- * Copyright (c) 2014 Jon Schlinkert, contributors.
+ * <%= appname %> https://github.com/<%= username %>/<%= _.slugify(projectname) %>
+ * Copyright (c) <%= (new Date).getFullYear() %> <%= authorname %>, contributors.
  * Licensed under the MIT License
  */
 
@@ -19,19 +19,19 @@ var log = require('verbalize');
 function introductionMessage() {
   console.log(log.bold('  Head\'s up!'));
   console.log();
-  console.log(log.gray('  Base saves time by offering to re-use answers from the'));
+  console.log(log.gray('  <%= _.pascalCase(generatorName) %> saves time by offering to re-use answers from the'));
   console.log(log.gray('  previous run. If something is incorrect, no worries!'));
   console.log(log.gray('  Just provide a new value!'));
   console.log();
 }
 
-log.runner = 'generator-base';
+log.runner = '<%= appname %>';
 
-var baseConfig = new Configstore('generator-base');
+var <%= _.camelCase(generatorName) %>Config = new Configstore('<%= appname %>');
 var userPkg = {};
 
-var BaseGenerator = module.exports = function BaseGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+var <%= _.pascalCase(generatorName) %>Generator = module.exports = function <%= _.pascalCase(generatorName) %>Generator(args, options, config) {
+  yeoman.generators.<%= _.pascalCase(generatorName) %>.apply(this, arguments);
   var self = this;
 
   // Mix methods from change-case into yeoman's Lo-Dash
@@ -57,10 +57,10 @@ var BaseGenerator = module.exports = function BaseGenerator(args, options, confi
     userPkg = normalize.all(this.readJSON('package.json'));
   }
 };
-util.inherits(BaseGenerator, yeoman.generators.Base);
+util.inherits(<%= _.pascalCase(generatorName) %>Generator, yeoman.generators.<%= _.pascalCase(generatorName) %>);
 
 
-BaseGenerator.prototype.askFor = function askFor() {
+<%= _.pascalCase(generatorName) %>Generator.prototype.askFor = function askFor() {
   var cb = this.async();
   var prompts = [];
 
@@ -70,8 +70,8 @@ BaseGenerator.prototype.askFor = function askFor() {
     introductionMessage();
   }
 
-  var author = baseConfig.get('author') || {};
-  var username = baseConfig.get('username') || this.username;
+  var author = <%= _.camelCase(generatorName) %>Config.get('author') || {};
+  var username = <%= _.camelCase(generatorName) %>Config.get('username') || this.username;
 
   prompts.push({
     name: 'projectname',
@@ -82,7 +82,7 @@ BaseGenerator.prototype.askFor = function askFor() {
   prompts.push({
     name: 'projectdesc',
     message: 'Want to add a description?',
-    default: userPkg.description || 'The most interesting project in the world > Base'
+    default: userPkg.description || 'The most interesting project in the world > <%= _.pascalCase(generatorName) %>'
   });
 
   prompts.push({
@@ -105,15 +105,15 @@ BaseGenerator.prototype.askFor = function askFor() {
 
   this.prompt(prompts, function (answers) {
 
-    baseConfig.set('username', answers.username);
-    baseConfig.set('author', {
+    <%= _.camelCase(generatorName) %>Config.set('username', answers.username);
+    <%= _.camelCase(generatorName) %>Config.set('author', {
       name: answers.authorname,
       url: answers.authorurl
     });
 
-    this.authorname = baseConfig.get('author').name;
-    this.authorurl = baseConfig.get('author').url;
-    this.username = baseConfig.get('username');
+    this.authorname = <%= _.camelCase(generatorName) %>Config.get('author').name;
+    this.authorurl = <%= _.camelCase(generatorName) %>Config.get('author').url;
+    this.username = <%= _.camelCase(generatorName) %>Config.get('username');
 
     this.projectname = answers.projectname;
     this.projectdesc = answers.projectdesc;
@@ -122,9 +122,9 @@ BaseGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
-BaseGenerator.prototype.app = function app() {
+<%= _.pascalCase(generatorName) %>Generator.prototype.app = function app() {
   var pkgTemplate = this.readFileAsString(path.join(this.sourceRoot(), './_package.json'));
-  var baseDefaultPkg = this.engine(pkgTemplate, this);
+  var <%= _.camelCase(generatorName) %>DefaultPkg = this.engine(pkgTemplate, this);
 
   // If a package.json already exists, let's try to just update the
   // values we asked about, and leave other data alone.
@@ -133,7 +133,7 @@ BaseGenerator.prototype.app = function app() {
     pkg.devDependencies = pkg.devDependencies || {};
 
     // Add any missing properties to the existing package.json
-    this._.defaults(pkg, JSON.parse(baseDefaultPkg));
+    this._.defaults(pkg, JSON.parse(<%= _.camelCase(generatorName) %>DefaultPkg));
 
     // Update some values we asked the user to provide.
     this._.extend(pkg.name, this.projectname);
@@ -141,8 +141,8 @@ BaseGenerator.prototype.app = function app() {
     this._.extend(pkg.author.name, this.authorname);
     this._.extend(pkg.author.url, this.authorurl);
 
-    // Add `base` to devDependencies. That's why we're here, right?
-    this._.extend(pkg.devDependencies, JSON.parse(baseDefaultPkg).devDependencies);
+    // Add `<%= _.camelCase(generatorName) %>` to devDependencies.
+    this._.extend(pkg.devDependencies, JSON.parse(<%= _.camelCase(generatorName) %>DefaultPkg).devDependencies);
 
     fs.unlink('package.json');
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
@@ -152,19 +152,19 @@ BaseGenerator.prototype.app = function app() {
 };
 
 
-BaseGenerator.prototype.readme = function readme() {
+<%= _.pascalCase(generatorName) %>Generator.prototype.readme = function readme() {
   if (!fs.existsSync('docs/README.tmpl.md') && !fs.existsSync('.verbrc.md')) {
     this.copy('README', '.verbrc.md');
   }
 };
 
-BaseGenerator.prototype.jshintrc = function jshintrc() {
+<%= _.pascalCase(generatorName) %>Generator.prototype.jshintrc = function jshintrc() {
   if (!fs.existsSync('.jshintrc')) {
     this.copy('jshintrc', '.jshintrc');
   }
 };
 
-BaseGenerator.prototype.git = function git() {
+<%= _.pascalCase(generatorName) %>Generator.prototype.git = function git() {
   if (!fs.existsSync('.gitignore')) {
     this.copy('gitignore', '.gitignore');
   }
@@ -174,7 +174,7 @@ BaseGenerator.prototype.git = function git() {
   }
 };
 
-BaseGenerator.prototype.license = function license() {
+<%= _.pascalCase(generatorName) %>Generator.prototype.license = function license() {
   if (!fs.existsSync('LICENSE-MIT')) {
     this.template('LICENSE-MIT');
   }

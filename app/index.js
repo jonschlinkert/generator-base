@@ -37,6 +37,7 @@ var BaseGenerator = module.exports = function BaseGenerator(args, options, confi
   // Mix methods from change-case into yeoman's Lo-Dash
   this._.mixin(changeCase);
   this.appname = changeCase.paramCase(this.appname);
+  this.generatorName = 'Base';
 
   this.readJSON = function() {
     var filepath = path.join.apply(path, arguments);
@@ -117,6 +118,11 @@ BaseGenerator.prototype.askFor = function askFor() {
 
     this.projectname = answers.projectname;
     this.projectdesc = answers.projectdesc;
+    if (/^generator/.test(this.appname)) {
+      this.generatorName = this.appname.replace(/^generator-/, '');
+    }
+
+  console.log(this);
 
     cb();
   }.bind(this));
