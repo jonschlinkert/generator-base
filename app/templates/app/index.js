@@ -31,7 +31,7 @@ var <%= _.camelCase(generatorName) %>Config = new Configstore('<%= appname %>');
 var userPkg = {};
 
 var <%= _.pascalCase(generatorName) %>Generator = module.exports = function <%= _.pascalCase(generatorName) %>Generator(args, options, config) {
-  yeoman.generators.<%= _.pascalCase(generatorName) %>.apply(this, arguments);
+  yeoman.generators.Base.apply(this, arguments);
   var self = this;
 
   // Mix methods from change-case into yeoman's Lo-Dash
@@ -57,7 +57,7 @@ var <%= _.pascalCase(generatorName) %>Generator = module.exports = function <%= 
     userPkg = normalize.all(this.readJSON('package.json'));
   }
 };
-util.inherits(<%= _.pascalCase(generatorName) %>Generator, yeoman.generators.<%= _.pascalCase(generatorName) %>);
+util.inherits(<%= _.pascalCase(generatorName) %>Generator, yeoman.generators.Base);
 
 
 <%= _.pascalCase(generatorName) %>Generator.prototype.askFor = function askFor() {
@@ -154,7 +154,7 @@ util.inherits(<%= _.pascalCase(generatorName) %>Generator, yeoman.generators.<%=
 
 <%= _.pascalCase(generatorName) %>Generator.prototype.readme = function readme() {
   if (!fs.existsSync('docs/README.tmpl.md') && !fs.existsSync('.verbrc.md')) {
-    this.copy('README', '.verbrc.md');
+    this.copy('verbrc.md', '.verbrc.md');
   }
 };
 
