@@ -1,6 +1,6 @@
 Once installed globally, simply run:
 
-* `yo base` to to start a new project
+* `yo base` to start a new project
 
 ### yo base
 

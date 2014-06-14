@@ -12,7 +12,7 @@
 {%= docs("options") %}
 
 ## Author
-{%= author.name %}
+{%= include("author") %}
 
 ## License
 {%= copyright() %}

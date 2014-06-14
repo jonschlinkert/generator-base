@@ -76,7 +76,7 @@ BaseGenerator.prototype.askFor = function askFor() {
 
   prompts.push({
     name: 'projectname',
-    message: 'What is the name of the project?',
+    message: 'What do you want to name your generator?',
     default: userPkg.name ? userPkg.name : this.appname
   });
 
@@ -121,9 +121,6 @@ BaseGenerator.prototype.askFor = function askFor() {
     if (/^generator/.test(this.appname)) {
       this.generatorName = this.appname.replace(/^generator-/, '');
     }
-
-  console.log(this);
-
     cb();
   }.bind(this));
 };

@@ -12,6 +12,7 @@ var util = require('util');
 var exec = require('child_process').exec;
 var changeCase = require('change-case');
 var Configstore = require('configstore');
+var namify = require('namify');
 var normalize = require('normalize-pkg');
 var yeoman = require('yeoman-generator');
 var log = require('verbalize');
@@ -19,7 +20,7 @@ var log = require('verbalize');
 function introductionMessage() {
   console.log(log.bold('  Head\'s up!'));
   console.log();
-  console.log(log.gray('  <%= _.pascalCase(generatorName) %> saves time by offering to re-use answers from the'));
+  console.log(log.gray('  <%= generatorName %> saves time by offering to re-use answers from the'));
   console.log(log.gray('  previous run. If something is incorrect, no worries!'));
   console.log(log.gray('  Just provide a new value!'));
   console.log();
@@ -36,6 +37,7 @@ var <%= _.pascalCase(generatorName) %>Generator = module.exports = function <%= 
 
   // Mix methods from change-case into yeoman's Lo-Dash
   this._.mixin(changeCase);
+  this._.mixin({namify: namify});
   this.appname = changeCase.paramCase(this.appname);
 
   this.readJSON = function() {
